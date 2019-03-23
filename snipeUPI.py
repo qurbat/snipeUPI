@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+import io
 import signal
 import requests
 import argparse
@@ -59,7 +60,7 @@ def single_query(sAddress):
 # read file
 def multiple_queries(infile):
 	print ("[-] Querying multiple addresses...")
-	with open(infile) as f:
+	with io.open(infile) as f:
 		for line in f:
 			mAddress =  line.strip('\n')
 			mPayload = {'vpaAddress': mAddress}
