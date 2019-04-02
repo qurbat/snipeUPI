@@ -36,13 +36,13 @@
 @rajgovhdfcbank
 @hsbc
 @imobile
-@ pockets
+@pockets
 @ezeepay
 @eazypay
 @icici
 @okicici
 @idbi
-@ idbibank
+@idbibank
 @idfc
 @idfcbank
 @idfcnetc
@@ -68,6 +68,7 @@
 @paytm
 @psb
 @pnb
+@rbl
 @sib
 @srcb
 @sc
@@ -95,3 +96,10 @@
 @yesbankltd
 @bandhan
 @dlb
+@apl
+@ikwik
+@axisb
+@hdfcbankjd
+@barodapay
+@icicibank
+@myicici
