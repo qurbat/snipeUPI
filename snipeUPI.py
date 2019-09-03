@@ -23,7 +23,6 @@ print('''
 	# Usage:	snipeUPI.py -a example@handle [query a single address]	\n			snipeUPI.py -f example.txt [query addresses from file]
 ''')
 # universal
-not_valid = b'Session expired'  # session not valid
 isvpavalid = b'true' #  address exists
 isnvpaotvalid = b'false' # address does not exist
 
@@ -35,19 +34,16 @@ signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 # headers
 headers = {
-	'User-Agent': 'Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0',
-	'Cookie': '_cookie1=EDIT; _cookie2=THESE; _cookie3=VALUES'
+	'User-Agent': 'Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0'
 }
 
-# BASE_URI = https://www.swiggy.com/dapi/payment/upi/verify-vpa
+# BASE_URI = https://www.redbus.in/Pay/checkCustomerVpa
+
 
 def single_query(sAddress):
 	print("[-] Running a single query...")
-	spayload = {'vpaAddress': sAddress}
-	sr = requests.get('https://www.swiggy.com/dapi/payment/upi/verify-vpa', params=spayload, headers=headers, timeout=10)
-	if not_valid in sr.content: # if session is not valid
-		print("Session is not valid. Please check your cookies...")
-		sys.exit()
+	spayload = {'pgTypeId': '37', 'vpa': sAddress}
+	sr = requests.post('https://www.redbus.in/Pay/checkCustomerVpa', params=spayload, headers=headers, timeout=10)
 	if isvpavalid in sr.content: # if VPA exists
 		print(sAddress + " already exists.") # print YES
 		sys.exit()
@@ -63,12 +59,8 @@ def multiple_queries(infile):
 	with io.open(infile) as f:
 		for line in f:
 			mAddress =  line.strip('\n')
-			mPayload = {'vpaAddress': mAddress}
-			mr = requests.get('https://www.swiggy.com/dapi/payment/upi/verify-vpa', params=mPayload, headers=headers)
-			if not_valid in mr.content: # if session is not valid
-				print("Session is not valid. Please check your cookies...")
-				f.close()
-				sys.exit()
+			mPayload = {'pgTypeId': '37', 'vpa': mAddress}
+			mr = requests.post('https://www.redbus.in/Pay/checkCustomerVpa', params=mPayload, headers=headers)
 			if isvpavalid in mr.content: # if VPA exists
 				print(mAddress + " already exists.") # print YES
 			elif isnvpaotvalid in mr.content: # if VPA does not exist
