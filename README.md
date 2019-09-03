@@ -1,6 +1,6 @@
 ## snipeUPI
 
-A script for querying and discovering existing and unclaimed Unified Payment Interface (UPI) Virtual Payment Addresses. 
+A script for querying and discovering existing and unclaimed Unified Payment Interface (UPI) virtual payment addresses. 
 
 ## Usage
 
